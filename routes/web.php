@@ -24,13 +24,15 @@ Route::get('/', function () {
 
 Route::get('/home', function(){
     return view('home',[
-        "title"=>"home"
+        "title"=>"home",
+        "active"=>"home"
     ]);
 });
 
 Route::get('/about', function(){
     return view('about',[
         "title"=>"About",
+        "active"=>"about",
         "name"=>"boy novriyal",
         "email"=>"boynovrial@gmail.com",
         "image"=>"boy.jpg"
@@ -45,6 +47,7 @@ Route::get('posts/{post:slug}', [PostController::class,'show']);
 Route::get('/categories',function(){
     return view('categories',[
         'title'=>'Post Categories',
+        'active'=>'categories',
         'categories'=>Category::all()
     ]);
 });
@@ -52,6 +55,7 @@ Route::get('/categories',function(){
 Route::get('/categories/{category:slug}', function(Category $category){
     return view('posts',[
         'title'=>"Post by category : $category->name",
+        'active'=>'categories',
         'posts'=>$category->posts->load('category','author')
     ]);
 });
@@ -59,6 +63,7 @@ Route::get('/categories/{category:slug}', function(Category $category){
 Route::get('/authors/{author:username}', function(User $author){
     return view('posts',[
         'title'=>"Post By Author : $author->name",
+
         'posts'=>$author->posts->load('category','author'),
     ]);
 });

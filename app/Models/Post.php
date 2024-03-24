@@ -12,6 +12,7 @@ class Post extends Model
     protected $fillable=[
         'title','slug','category_id','excerpt','body'
     ];
+    protected $with=['category','author'];
     // protected $guarded=['id']; gk boleh di isi sisanya boleh
     public function category()
     {
